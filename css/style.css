@@ -182,6 +182,14 @@ body.dark-mode .nav-link {
     overflow: hidden;
 }
 
+/* Overlay element yang ada di index.html */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 50%, transparent 0%, rgba(0,0,0,0.22) 100%);
+    pointer-events: none;
+}
+
 .hero::before {
     content: '';
     position: absolute;
@@ -192,6 +200,7 @@ body.dark-mode .nav-link {
     background: radial-gradient(circle at 20% 50%, transparent 0%, rgba(0,0,0,0.2) 100%);
     pointer-events: none;
 }
+
 
 .hero::after {
     content: '';

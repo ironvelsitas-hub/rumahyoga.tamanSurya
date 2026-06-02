@@ -892,17 +892,9 @@ if (membershipSection) {
     observer.observe(membershipSection);
 }
 
-// Hover effect for class cards
-const classCards = document.querySelectorAll('.class-card');
-classCards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-10px)';
-    });
-    
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0)';
-    });
-});
+// Hover effect for class cards (diambil alih oleh CSS agar konsisten)
+// Bagian ini sengaja dinonaktifkan untuk mencegah konflik dengan rule CSS class-card:hover.
+
 
 // Form validation with real-time feedback
 const inputs = document.querySelectorAll('#contactForm input, #contactForm textarea, #membershipForm input');
