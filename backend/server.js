@@ -17,8 +17,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../')));
 
-// Database setup
-const db = new sqlite3.Database('./database/rumahyoga.db');
+// Database setup (wajib absolut agar bisa jalan di environment hosting seperti Vercel)
+const dbPath = path.join(__dirname, 'database', 'rumahyoga.db');
+const db = new sqlite3.Database(dbPath, (err) => {
+    if (err) {
+        console.error('❌ Gagal membuka database sqlite:', dbPath);
+        console.error(err);
+    } else {
+        console.log('✅ SQLite database terbuka:', dbPath);
+    }
+});
+
 
 // Create tables
 db.serialize(() => {
