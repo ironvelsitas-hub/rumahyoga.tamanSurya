@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rumah Yoga - Pusat Kebugaran & Yoga Profesional</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lightbox CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://via.placeholder.com/40x40/2E7D32/ffffff?text=R Y" alt="Logo" class="logo-img">
+                <span class="brand-text">Rumah Yoga</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Tentang</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#classes">Kelas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#schedule">Jadwal</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#membership">Membership</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Galeri</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimoni</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <div class="row min-vh-100 align-items-center">
+                <div class="col-lg-8 text-center mx-auto" data-aos="fade-up">
+                    <h1 class="display-3 fw-bold mb-4">Selamat Datang di Rumah Yoga</h1>
+                    <p class="lead mb-5">Tempat Terbaik untuk Menjaga Kesehatan Tubuh dan Ketenangan Pikiran</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary btn-lg" onclick="scrollToSection('membership')">Daftar Membership</button>
+                        <button class="btn btn-outline-light btn-lg ms-3" onclick="scrollToSection('classes')">Lihat Kelas</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title" data-aos="fade-up">Tentang Kami</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4" data-aos="fade-right">
+                    <img src="images/yoga.jpeg" alt="Instruktur Yoga" class="img-fluid rounded-3 shadow-lg">                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <h3 class="mb-4">Pusat Kebugaran & Kesehatan Terpercaya</h3>
+                    <p class="lead mb-4">Rumah Yoga adalah pusat kebugaran dan kesehatan yang menyediakan berbagai kelas olahraga dan yoga dengan instruktur profesional. Kami berkomitmen membantu setiap anggota mencapai gaya hidup sehat, aktif, dan seimbang.</p>
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-3">
+                            <div class="feature-card">
+                                <i class="fas fa-calendar-check fa-2x mb-3"></i>
+                                <h5>Berdiri Sejak 2018</h5>
+                                <p>Lebih dari 5000+ anggota puas</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="feature-card">
+                                <i class="fas fa-chalkboard-user fa-2x mb-3"></i>
+                                <h5>Instruktur Profesional</h5>
+                                <p>Bersertifikat & berpengalaman</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Classes Section -->
+    <section id="classes" class="classes bg-light">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title" data-aos="fade-up">Fasilitas dan Kelas</h2>
+                <div class="divider"></div>
+                <p class="section-subtitle">Berbagai pilihan kelas untuk semua kebutuhan Anda</p>
+            </div>
+            <div class="row">
+                <!-- Yoga Classes -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="class-card card h-100" data-aos="flip-left">
+                        <img src="images/yoga1.jpeg" class="card-img-top" alt="Yoga">
+                        <div class="card-body">
+                            <div class="class-icon">
+                                <i class="fas fa-praying-hands"></i>
+                            </div>
+                            <h4 class="card-title">Berbagai Jenis Kelas Yoga</h4>
+                            <div class="class-items">
+                                <span class="badge">Hatha Yoga</span>
+                                <span class="badge">Vinyasa Yoga</span>
+                                <span class="badge">Power Yoga</span>
+                                <span class="badge">Yin Yoga</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aerobics -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="class-card card h-100" data-aos="flip-left" data-aos-delay="100">
+                        <img src="images/yoga2.jpeg" class="card-img-top" alt="Aerobik">
+                        <div class="card-body">
+                            <div class="class-icon">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                            <h4 class="card-title">Aerobik & Step Aerobik</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check"></i> Melatih daya tahan tubuh</li>
+                                <li><i class="fas fa-check"></i> Meningkatkan kesehatan jantung</li>
+                                <li><i class="fas fa-check"></i> Membakar kalori secara efektif</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Body Language -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="class-card card h-100" data-aos="flip-left" data-aos-delay="200">
+                        <img src="images/yoga3.jpg" class="card-img-top" alt="Body Language">
+                        <div class="card-body">
+                            <div class="class-icon">
+                                <i class="fas fa-dumbbell"></i>
+                            </div>
+                            <h4 class="card-title">Body Language (BL)</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check"></i> Latihan pembentukan tubuh</li>
+                                <li><i class="fas fa-check"></i> Melatih keseimbangan</li>
+                                <li><i class="fas fa-check"></i> Meningkatkan fleksibilitas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mat Pilates -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="class-card card h-100" data-aos="flip-left" data-aos-delay="300">
+                        <img src="images/yoga4.jpeg" class="card-img-top" alt="Pilates">
+                        <div class="card-body">
+                            <div class="class-icon">
+                                <i class="fas fa-spa"></i>
+                            </div>
+                            <h4 class="card-title">Mat Pilates</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check"></i> Menguatkan otot inti</li>
+                                <li><i class="fas fa-check"></i> Memperbaiki postur tubuh</li>
+                                <li><i class="fas fa-check"></i> Meningkatkan fleksibilitas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zumba & Pound Fit -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="class-card card h-100" data-aos="flip-left" data-aos-delay="400">
+                        <img src="images/yoga5.webp" class="card-img-top" alt="Zumba">
+                        <div class="card-body">
+                            <div class="class-icon">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <h4 class="card-title">Zumba & Pound Fit</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check"></i> Latihan kardio menyenangkan</li>
+                                <li><i class="fas fa-check"></i> Diiringi musik energik</li>
+                                <li><i class="fas fa-check"></i> Cocok untuk semua usia</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Extra Class -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="class-card card h-100" data-aos="flip-left" data-aos-delay="500">
+                        <img src="images/yoga6.jpeg" class="card-img-top" alt="Meditation">
+                        <div class="card-body">
+                            <div class="class-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4 class="card-title">Meditasi & Mindfulness</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check"></i> Mengurangi stres</li>
+                                <li><i class="fas fa-check"></i> Meningkatkan fokus</li>
+                                <li><i class="fas fa-check"></i> Ketenangan pikiran</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SCHEDULE SECTION ==================== -->
+    <!-- Schedule Section -->
+    <section id="schedule" class="schedule bg-light">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title" data-aos="fade-up">Jadwal Kelas Yoga</h2>
+                <div class="divider"></div>
+                <p class="section-subtitle">Periode Juni 2026</p>
+            </div>
+            
+            <div class="schedule-container" data-aos="fade-up">
+                <div class="schedule-tabs">
+                    <button class="schedule-tab active" data-day="senin">SENIN</button>
+                    <button class="schedule-tab" data-day="selasa">SELASA</button>
+                    <button class="schedule-tab" data-day="rabu">RABU</button>
+                    <button class="schedule-tab" data-day="kamis">KAMIS</button>
+                    <button class="schedule-tab" data-day="jumat">JUMAT</button>
+                    <button class="schedule-tab" data-day="sabtu">SABTU</button>
+                    <button class="schedule-tab" data-day="minggu">MINGGU</button>
+                </div>
+                
+                <div class="schedule-content">
+                    <!-- Schedule content will be loaded by JavaScript -->
+                    <div id="scheduleTable"></div>
+                </div>
+            </div>
+            
+            <!-- Info Note -->
+            <div class="schedule-note mt-4" data-aos="fade-up">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Informasi:</strong> Kelas dengan status "BOOKED CLASS" adalah kelas privat yang sudah dipesan. Untuk kelas reguler, silakan daftar 1 hari sebelum jadwal.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership Section -->
+    <section id="membership" class="membership">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title" data-aos="fade-up">Paket Membership</h2>
+                <div class="divider"></div>
+                <p class="section-subtitle">Pilih paket yang sesuai dengan kebutuhan Anda</p>
+            </div>
+            <div class="row">
+                <!-- Basic -->
+                <div class="col-lg-4 mb-4" data-aos="zoom-in">
+                    <div class="membership-card">
+                        <div class="membership-header">
+                            <h3>Basic</h3>
+                            <div class="price">
+                                <span class="currency">Rp</span>
+                                <span class="amount">150.000</span>
+                                <span class="period">/bulan</span>
+                            </div>
+                        </div>
+                        <div class="membership-body">
+                            <ul class="features-list">
+                                <li><i class="fas fa-check-circle"></i> Akses 2 kelas per minggu</li>
+                                <li><i class="fas fa-check-circle"></i> Konsultasi instruktur</li>
+                                <li><i class="fas fa-times-circle"></i> Akses semua kelas</li>
+                                <li><i class="fas fa-times-circle"></i> Jadwal fleksibel</li>
+                                <li><i class="fas fa-times-circle"></i> Personal Trainer</li>
+                            </ul>
+                            <button class="btn btn-membership w-100" onclick="showMembershipForm('Basic')">Pilih Paket</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Premium -->
+                <div class="col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="membership-card popular">
+                        <div class="popular-badge">Populer</div>
+                        <div class="membership-header">
+                            <h3>Premium</h3>
+                            <div class="price">
+                                <span class="currency">Rp</span>
+                                <span class="amount">300.000</span>
+                                <span class="period">/bulan</span>
+                            </div>
+                        </div>
+                        <div class="membership-body">
+                            <ul class="features-list">
+                                <li><i class="fas fa-check-circle"></i> Akses semua kelas</li>
+                                <li><i class="fas fa-check-circle"></i> Jadwal fleksibel</li>
+                                <li><i class="fas fa-check-circle"></i> Konsultasi rutin</li>
+                                <li><i class="fas fa-check-circle"></i> Akses penuh fasilitas</li>
+                                <li><i class="fas fa-times-circle"></i> Personal Trainer</li>
+                            </ul>
+                            <button class="btn btn-membership w-100" onclick="showMembershipForm('Premium')">Pilih Paket</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIP -->
+                <div class="col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="membership-card">
+                        <div class="membership-header">
+                            <h3>VIP</h3>
+                            <div class="price">
+                                <span class="currency">Rp</span>
+                                <span class="amount">500.000</span>
+                                <span class="period">/bulan</span>
+                            </div>
+                        </div>
+                        <div class="membership-body">
+                            <ul class="features-list">
+                                <li><i class="fas fa-check-circle"></i> Semua fasilitas Premium</li>
+                                <li><i class="fas fa-check-circle"></i> Personal Trainer</li>
+                                <li><i class="fas fa-check-circle"></i> Prioritas Booking Kelas</li>
+                                <li><i class="fas fa-check-circle"></i> Akses 24/7</li>
+                                <li><i class="fas fa-check-circle"></i> Free merchandise</li>
+                            </ul>
+                            <button class="btn btn-membership w-100" onclick="showMembershipForm('VIP')">Pilih Paket</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery bg-light">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title" data-aos="fade-up">Galeri Kami</h2>
+                <div class="divider"></div>
+                <p class="section-subtitle">Suasana dan kegiatan di Rumah Yoga</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                    <a href="images/yoga.jpeg" data-lightbox="gallery" class="gallery-item">
+                        <img src="images/yoga.jpeg" alt="Kelas Yoga" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <h5>Kelas Yoga</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <a href="images/yoga.jpeg" data-lightbox="gallery" class="gallery-item">
+                        <img src="images/yoga.jpeg" alt="Zumba" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <h5>Zumba</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <a href="images/yoga.jpeg" data-lightbox="gallery" class="gallery-item">
+                        <img src="images/yoga.jpeg" alt="Pilates" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <h5>Pilates</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <a href="images/yoga.jpeg" data-lightbox="gallery" class="gallery-item">
+                        <img src="images/yoga.jpeg" alt="Aerobik" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <h5>Aerobik</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <a href="images/yoga.jpeg" data-lightbox="gallery" class="gallery-item">
+                        <img src="images/yoga.jpeg" alt="Ruang Latihan" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <h5>Ruang Latihan</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="500">
+                    <a href="images/yoga.jpeg" data-lightbox="gallery" class="gallery-item">
+                        <img src="images/yoga.jpeg" alt="Area Relaksasi" class="img-fluid">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <h5>Area Relaksasi</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title" data-aos="fade-up">Testimoni Anggota</h2>
+                <div class="divider"></div>
+                <p class="section-subtitle">Apa kata mereka tentang Rumah Yoga</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-4" data-aos="fade-right">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">"Instruktur sangat profesional dan suasana tempatnya nyaman. Fasilitas lengkap dan bersih. Sangat recommended untuk yang ingin hidup sehat!"</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Sarah" class="author-img">
+                                <div>
+                                    <h5>Sarah Wijaya</h5>
+                                    <p>Member Premium</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4" data-aos="fade-left">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">"Pilihan kelasnya lengkap dan membership sangat terjangkau. Setelah 3 bulan rutin, badan saya jadi lebih sehat dan bugar!"</p>
+                            <div class="testimonial-author">
+                                <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Andi" class="author-img">
+                                <div>
+                                    <h5>Andi Pratama</h5>
+                                    <p>Member Basic</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title" data-aos="fade-up">Hubungi Kami</h2>
+                <div class="divider"></div>
+                <p class="section-subtitle">Siap memulai perjalanan sehat Anda?</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-4" data-aos="fade-right">
+                    <div class="contact-info">
+                        <h3>Informasi Kontak</h3>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h5>Alamat</h5>
+                                <p>Jl. Kesehatan No. 123, Jakarta Selatan 12120</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h5>Telepon</h5>
+                                <p>(021) 1234 5678</p>
+                                <p>0812 3456 7890</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h5>Email</h5>
+                                <p>info@rumahyoga.com</p>
+                                <p>cs@rumahyoga.com</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h5>Jam Operasional</h5>
+                                <p>Senin - Jumat: 06:00 - 21:00</p>
+                                <p>Sabtu - Minggu: 07:00 - 20:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <form id="contactForm" class="contact-form">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="name" placeholder="Nama Lengkap" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" id="email" placeholder="Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="tel" class="form-control" id="phone" placeholder="Nomor HP" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" id="message" rows="5" placeholder="Pesan" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Kirim Pesan</button>
+                    </form>
+                    <div id="formMessage" class="alert mt-3" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <img src="images/logo1.jpg" alt="Logo" class="footer-logo">
+                    <h4>Rumah Yoga</h4>
+                    <p>Temukan keseimbangan hidup melalui yoga dan kebugaran bersama kami.</p>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Menu Navigasi</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#about">Tentang</a></li>
+                        <li><a href="#classes">Kelas</a></li>
+                        <li><a href="#schedule">Jadwal</a></li>
+                        <li><a href="#membership">Membership</a></li>
+                        <li><a href="#gallery">Galeri</a></li>
+                        <li><a href="#testimonials">Testimoni</a></li>
+                        <li><a href="#contact">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Ikuti Kami</h5>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Rumah Yoga. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Membership Modal -->
+    <div class="modal fade" id="membershipModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Daftar Membership</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="membershipForm">
+                        <input type="hidden" id="selectedPackage" name="package">
+                        <div class="mb-3">
+                            <label class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="memberName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="memberEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nomor HP</label>
+                            <input type="tel" class="form-control" id="memberPhone" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Daftar Sekarang</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/darkmode.js"></script>
+</body>
+</html>

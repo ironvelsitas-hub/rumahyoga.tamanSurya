@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Rumah Yoga</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- DataTables -->
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <i class="fas fa-yoga"></i>
+                    <h2>Admin Dashboard</h2>
+                    <p>Rumah Yoga</p>
+                </div>
+                <form id="adminLoginForm">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="adminUsername" placeholder="Username" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="adminPassword" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-login w-100">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+                <div id="loginError" class="alert alert-danger mt-3" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="dashboardContent" style="display: none;">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-yoga"></i>
+                <h3>Rumah Yoga</h3>
+                <span>Admin Panel</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link active" data-page="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-link" data-page="members">
+                    <i class="fas fa-users"></i>
+                    <span>Data Member</span>
+                </a>
+                <a href="#" class="nav-link" data-page="registrations">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Pendaftaran Membership</span>
+                </a>
+                <a href="#" class="nav-link" data-page="bookings">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Booking Kelas</span>
+                </a>
+                <a href="#" class="nav-link" data-page="contacts">
+                    <i class="fas fa-envelope"></i>
+                    <span>Pesan Kontak</span>
+                </a>
+                <a href="#" class="nav-link" data-page="classes">
+                    <i class="fas fa-chalkboard-user"></i>
+                    <span>Manajemen Kelas</span>
+                </a>
+                <a href="#" class="nav-link" data-page="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Pengaturan</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn btn-logout w-100">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="welcome-text">
+                    <h4>Selamat Datang, <span id="adminName">Admin</span></h4>
+                    <p>Kelola data Rumah Yoga dengan mudah</p>
+                </div>
+                <div class="top-bar-actions">
+                    <span class="date-time" id="currentDateTime"></span>
+                    <button id="refreshData" class="btn btn-refresh">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Page -->
+            <div id="dashboardPage" class="page-content active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalMembers">0</h3>
+                            <p>Total Member</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-file-signature"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalRegistrations">0</h3>
+                            <p>Pendaftaran Baru</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalBookings">0</h3>
+                            <p>Total Booking</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalMessages">0</h3>
+                            <p>Pesan Belum Dibaca</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="chart-card">
+                            <h5>Statistik Pendaftaran (6 Bulan Terakhir)</h5>
+                            <canvas id="registrationsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="chart-card">
+                            <h5>Distribusi Paket Membership</h5>
+                            <canvas id="packageChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <div class="table-card">
+                        <h5>Pendaftaran Terbaru</h5>
+                        <div class="table-responsive">
+                            <table class="table" id="recentRegistrations">
+                                <thead>
+                                    <tr>
+                                        <th>Tanggal</th>
+                                        <th>Nama</th>
+                                        <th>Paket</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Members Page -->
+            <div id="membersPage" class="page-content">
+                <div class="page-header">
+                    <h4><i class="fas fa-users"></i> Data Member</h4>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMemberModal">
+                        <i class="fas fa-plus"></i> Tambah Member
+                    </button>
+                </div>
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table id="membersTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Telepon</th>
+                                    <th>Paket</th>
+                                    <th>Tanggal Bergabung</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registrations Page -->
+            <div id="registrationsPage" class="page-content">
+                <div class="page-header">
+                    <h4><i class="fas fa-file-alt"></i> Pendaftaran Membership</h4>
+                </div>
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table id="registrationsTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tanggal</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Telepon</th>
+                                    <th>Paket</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== UPDATED BOOKINGS PAGE WITH WHATSAPP ==================== -->
+            <div id="bookingsPage" class="page-content">
+                <div class="page-header">
+                    <h4><i class="fas fa-calendar-check"></i> Booking Kelas</h4>
+                    <div class="btn-group">
+                        <button class="btn btn-success" onclick="sendBulkWhatsApp()">
+                            <i class="fab fa-whatsapp"></i> Broadcast WhatsApp
+                        </button>
+                        <button class="btn btn-info" onclick="exportBookingsToExcel()">
+                            <i class="fas fa-file-excel"></i> Export Excel
+                        </button>
+                        <button class="btn btn-secondary" onclick="printBookings()">
+                            <i class="fas fa-print"></i> Print
+                        </button>
+                    </div>
+                </div>
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table id="bookingsTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="selectAllBookings" onchange="toggleSelectAll()"></th>
+                                    <th>ID</th>
+                                    <th>Tanggal Booking</th>
+                                    <th>Hari</th>
+                                    <th>Jam</th>
+                                    <th>Kelas</th>
+                                    <th>Instruktur</th>
+                                    <th>Nama Member</th>
+                                    <th>Email</th>
+                                    <th>No. HP</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contacts Page -->
+            <div id="contactsPage" class="page-content">
+                <div class="page-header">
+                    <h4><i class="fas fa-envelope"></i> Pesan Kontak</h4>
+                </div>
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table id="contactsTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tanggal</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Telepon</th>
+                                    <th>Pesan</th>
+                                    <th>Status Baca</th>
+                                    <th>Status Balas</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Classes Page -->
+            <div id="classesPage" class="page-content">
+                <div class="page-header">
+                    <h4><i class="fas fa-chalkboard-user"></i> Manajemen Kelas</h4>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addClassModal">
+                        <i class="fas fa-plus"></i> Tambah Kelas
+                    </button>
+                </div>
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table id="classesTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nama Kelas</th>
+                                    <th>Instruktur</th>
+                                    <th>Jadwal</th>
+                                    <th>Kapasitas</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Page -->
+            <div id="settingsPage" class="page-content">
+                <div class="settings-card">
+                    <h5><i class="fas fa-user-shield"></i> Ganti Password Admin</h5>
+                    <form id="changePasswordForm">
+                        <div class="mb-3">
+                            <label>Password Lama</label>
+                            <input type="password" class="form-control" id="oldPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Password Baru</label>
+                            <input type="password" class="form-control" id="newPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Konfirmasi Password Baru</label>
+                            <input type="password" class="form-control" id="confirmPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tambah Member -->
+    <div class="modal fade" id="addMemberModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah Member Baru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addMemberForm">
+                        <div class="mb-3">
+                            <label>Nama Lengkap</label>
+                            <input type="text" class="form-control" id="memberName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Email</label>
+                            <input type="email" class="form-control" id="memberEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Telepon</label>
+                            <input type="tel" class="form-control" id="memberPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Paket Membership</label>
+                            <select class="form-control" id="memberPackage" required>
+                                <option value="Basic">Basic (Rp 150.000)</option>
+                                <option value="Premium">Premium (Rp 300.000)</option>
+                                <option value="VIP">VIP (Rp 500.000)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tambah Kelas -->
+    <div class="modal fade" id="addClassModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah Kelas Baru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addClassForm">
+                        <div class="mb-3">
+                            <label>Nama Kelas</label>
+                            <input type="text" class="form-control" id="className" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Instruktur</label>
+                            <input type="text" class="form-control" id="classInstructor" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Jadwal</label>
+                            <input type="text" class="form-control" id="classSchedule" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Kapasitas</label>
+                            <input type="number" class="form-control" id="classCapacity" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reply Modal -->
+    <div class="modal fade" id="replyModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-reply"></i> Balas Pesan
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="original-message mb-4">
+                        <h6>Pesan Asli:</h6>
+                        <div class="message-box" id="originalMessage"></div>
+                    </div>
+                    
+                    <div class="reply-history mb-4">
+                        <h6>Riwayat Balasan:</h6>
+                        <div id="replyHistory" class="reply-history-container"></div>
+                    </div>
+                    
+                    <form id="replyForm">
+                        <input type="hidden" id="replyContactId">
+                        <input type="hidden" id="replyUserEmail">
+                        <input type="hidden" id="replyUserName">
+                        <div class="mb-3">
+                            <label class="form-label">Balasan Anda:</label>
+                            <textarea class="form-control" id="replyMessage" rows="4" required placeholder="Tulis balasan Anda di sini..."></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="sendEmailCopy" checked>
+                                <label class="form-check-label" for="sendEmailCopy">
+                                    Kirim salinan ke email user
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Kirim Balasan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Booking Detail Modal -->
+    <div class="modal fade" id="bookingDetailModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-calendar-check"></i> Detail Booking
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="bookingDetailContent">
+                    <!-- Content will be filled by JavaScript -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== WHATSAPP MODALS ==================== -->
+    
+    <!-- WhatsApp Message Modal - Bulk Broadcast -->
+    <div class="modal fade" id="whatsappModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fab fa-whatsapp" style="color: #25D366;"></i> Kirim Pesan WhatsApp Broadcast
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Penerima (<span id="recipientCount">0</span> member):</label>
+                            <div class="selected-recipients" id="selectedRecipients" style="max-height: 200px; overflow-y: auto; border: 1px solid #ddd; border-radius: 8px; padding: 10px;"></div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Template Pesan:</label>
+                            <select class="form-control" id="messageTemplate" onchange="applyTemplate()">
+                                <option value="">-- Pilih Template --</option>
+                                <option value="reminder">📅 Pengingat Kelas</option>
+                                <option value="cancellation">❌ Pembatalan Kelas</option>
+                                <option value="reschedule">🔄 Jadwal Berubah</option>
+                                <option value="confirmation">✅ Konfirmasi Booking</option>
+                                <option value="custom">✏️ Kustom</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Pesan:</label>
+                            <textarea class="form-control" id="whatsappMessage" rows="8" 
+                                placeholder="Tulis pesan Anda di sini...&#10;&#10;Gunakan variabel:&#10;{name} - Nama member&#10;{class} - Nama kelas&#10;{date} - Tanggal booking&#10;{time} - Jam kelas&#10;{instructor} - Nama instruktur&#10;{day} - Hari kelas"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle"></i>
+                                <strong>Info:</strong> 
+                                <ul class="mb-0 mt-2">
+                                    <li>Pesan akan dikirim melalui WhatsApp Web</li>
+                                    <li>Pastikan Anda sudah login ke WhatsApp Web di browser</li>
+                                    <li>Untuk broadcast banyak member, akan membuka multiple tab</li>
+                                    <li>Gunakan variabel untuk personalisasi pesan</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-success" onclick="sendWhatsAppMessages()">
+                        <i class="fab fa-whatsapp"></i> Kirim ke WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Single WhatsApp Message Modal -->
+    <div class="modal fade" id="singleWhatsappModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fab fa-whatsapp" style="color: #25D366;"></i> Kirim Pesan WhatsApp
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Nomor WhatsApp:</label>
+                        <input type="text" class="form-control" id="singleWhatsappNumber" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nama Member:</label>
+                        <input type="text" class="form-control" id="singleWhatsappName" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Detail Booking:</label>
+                        <div class="alert alert-secondary" id="singleBookingDetail" style="font-size: 13px;"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Pesan:</label>
+                        <textarea class="form-control" id="singleWhatsappMessage" rows="6"></textarea>
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> Klik "Kirim" untuk membuka WhatsApp Web
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-success" onclick="sendSingleWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> Kirim
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Styles -->
+    <style>
+        .unread-badge {
+            position: absolute;
+            right: 20px;
+            background: #dc3545;
+            color: white;
+            border-radius: 10px;
+            padding: 2px 8px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        
+        .reply-history-container {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .reply-item {
+            background: #f8f9fa;
+            border-left: 3px solid #2E7D32;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+        
+        .reply-item.admin {
+            border-left-color: #ffc107;
+            background: #fff8e7;
+        }
+        
+        .reply-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .reply-message {
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        .message-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #2E7D32;
+        }
+        
+        .original-message h6, .reply-history h6 {
+            color: #2E7D32;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .btn-action {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: none;
+            transition: all 0.3s ease;
+            margin: 2px;
+        }
+        
+        .btn-action:hover {
+            transform: scale(1.05);
+        }
+        
+        .btn-reply {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        .btn-reply:hover {
+            background: #138496;
+        }
+        
+        .booking-status {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .custom-notification {
+            animation: slideIn 0.3s ease;
+        }
+        
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .selected-recipients .list-group-item {
+            padding: 8px 12px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        .selected-recipients .list-group-item i {
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .btn-group {
+                flex-direction: column;
+                width: 100%;
+            }
+            .btn-group .btn {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
